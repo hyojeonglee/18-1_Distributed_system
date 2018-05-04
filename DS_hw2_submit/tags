@@ -1,0 +1,66 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+APPS	Makefile	/^APPS	:= ctree$/;"	m
+Args	ctree.h	/^struct Args {$/;"	s
+CC	Makefile	/^CC	:= gcc$/;"	m
+CFLAGS	Makefile	/^CFLAGS	:= -g -I$(IDIR) -O3 -Wall -Werror=uninitialized -std=gnu99$/;"	m
+COMBINE_NUM	ctree.c	9;"	d	file:
+CTREE	Makefile	/^CTREE	:= ctree$/;"	m
+CombiningTree	ctree.h	/^struct CombiningTree {$/;"	s
+Cstatus	ctree.h	/^enum Cstatus { IDLE, FIRST, SECOND, RESULT, ROOT };$/;"	g
+FIRST	ctree.h	/^enum Cstatus { IDLE, FIRST, SECOND, RESULT, ROOT };$/;"	e	enum:Cstatus
+IDIR	Makefile	/^IDIR	:= .\/$/;"	m
+IDLE	ctree.h	/^enum Cstatus { IDLE, FIRST, SECOND, RESULT, ROOT };$/;"	e	enum:Cstatus
+INFI	ctree.h	1;"	d
+Item	stack_linkedlist.h	/^typedef struct Item {$/;"	s
+Item	stack_linkedlist.h	/^} Item;$/;"	t	typeref:struct:Item
+Node	ctree.h	/^struct Node {$/;"	s
+OBJ_CT	Makefile	/^OBJ_CT	:= $(patsubst %,$(ODIR)\/%,$(_OBJ_CT))$/;"	m
+OBJ_ST	Makefile	/^OBJ_ST	:= $(patsubst %,$(ODIR)\/%,$(_OBJ_ST))$/;"	m
+ODIR	Makefile	/^ODIR	:= .\/$/;"	m
+RESULT	ctree.h	/^enum Cstatus { IDLE, FIRST, SECOND, RESULT, ROOT };$/;"	e	enum:Cstatus
+ROOT	ctree.h	/^enum Cstatus { IDLE, FIRST, SECOND, RESULT, ROOT };$/;"	e	enum:Cstatus
+ROUND	ctree.c	10;"	d	file:
+SECOND	ctree.h	/^enum Cstatus { IDLE, FIRST, SECOND, RESULT, ROOT };$/;"	e	enum:Cstatus
+_OBJ_CT	Makefile	/^_OBJ_CT	:= ctree.o stack_linkedlist.o$/;"	m
+_OBJ_ST	Makefile	/^_OBJ_ST	:= stack_linkedlist.o$/;"	m
+combine	ctree.c	/^int combine(struct Node* node, int combined)$/;"	f
+cond	ctree.h	/^	pthread_cond_t* cond;$/;"	m	struct:Node
+cond_result	ctree.h	/^	pthread_cond_t* cond_result;$/;"	m	struct:Node
+cstatus	ctree.h	/^	enum Cstatus cstatus;$/;"	m	struct:Node	typeref:enum:Node::Cstatus
+ctree_2	ctree.c	/^struct CombiningTree* ctree_2;$/;"	v	typeref:struct:CombiningTree
+ctree_4	ctree.c	/^struct CombiningTree* ctree_4;$/;"	v	typeref:struct:CombiningTree
+ctree_8	ctree.c	/^struct CombiningTree* ctree_8;$/;"	v	typeref:struct:CombiningTree
+distribute	ctree.c	/^void distribute(struct Node* node, int prior)$/;"	f
+first_val	ctree.h	/^	int first_val, second_val;$/;"	m	struct:Node
+getAndInc_wrapper	ctree.c	/^void* getAndInc_wrapper(void* ptr) $/;"	f
+getAndIncrement	ctree.c	/^int getAndIncrement(struct CombiningTree* ctree, int id)$/;"	f
+id	ctree.h	/^	int id;$/;"	m	struct:Args
+id	ctree.h	/^	int id;$/;"	m	struct:Node
+init_combiningtree	ctree.c	/^void init_combiningtree(struct CombiningTree* ctree, int width)$/;"	f
+init_node	ctree.c	/^void init_node(struct CombiningTree* ctree, int i)$/;"	f
+init_root_node	ctree.c	/^void init_root_node(struct CombiningTree* ctree)$/;"	f
+isEmpty	stack_linkedlist.c	/^int isEmpty(Item* top)$/;"	f
+leaf	ctree.h	/^	struct Node* leaf[INFI];$/;"	m	struct:CombiningTree	typeref:struct:CombiningTree::Node
+locked	ctree.h	/^	int locked;$/;"	m	struct:Node
+main	ctree.c	/^int main(void) $/;"	f
+next	stack_linkedlist.h	/^	struct Item* next;$/;"	m	struct:Item	typeref:struct:Item::Item
+node	stack_linkedlist.h	/^	struct Node* node;$/;"	m	struct:Item	typeref:struct:Item::Node
+node_lock	ctree.c	/^void node_lock(struct Node* node)$/;"	f
+node_lock	ctree.h	/^	pthread_mutex_t* node_lock;$/;"	m	struct:Node
+node_unlock	ctree.c	/^void node_unlock(struct Node* node)$/;"	f
+nodes	ctree.h	/^	struct Node* nodes[INFI];$/;"	m	struct:CombiningTree	typeref:struct:CombiningTree::Node
+notify_all	ctree.c	/^void notify_all(pthread_cond_t* cond)$/;"	f
+op	ctree.c	/^int op(struct Node* node, int combined)$/;"	f
+parent	ctree.h	/^	struct Node* parent;$/;"	m	struct:Node	typeref:struct:Node::Node
+pop	stack_linkedlist.c	/^struct Item* pop(Item* top)$/;"	f
+precombine	ctree.c	/^int precombine(struct Node* node)$/;"	f
+push	stack_linkedlist.c	/^void push(Item* top, struct Node* node)$/;"	f
+result	ctree.h	/^	int result;$/;"	m	struct:Node
+second_val	ctree.h	/^	int first_val, second_val;$/;"	m	struct:Node
+thread_num	ctree.c	/^int thread_num;$/;"	v
+wait	ctree.c	/^void wait(pthread_cond_t* cond, pthread_mutex_t* cond_mutex)$/;"	f
