@@ -37,6 +37,7 @@ int set_contains(intset_t *set, val_t val, int transactional)
 	val_t v = 0;
 
 	if (transactional > 1) {
+//added by charlie
 		if((status = _xbegin()) == _XBEGIN_STARTED){
 			prev = set->head;
 			next = (node_t *)TX_LOAD(&prev->next);
@@ -54,6 +55,7 @@ int set_contains(intset_t *set, val_t val, int transactional)
 			printf("contains abort\n");
 			result = harris_find(set, val);
 		}
+//charlie finish
 	} else {
 		printf("set_contains no transactional\n");
 		TX_START(NL);
@@ -122,6 +124,7 @@ int set_add(intset_t *set, val_t val, int transactional)
 		val_t v;	
 
 		if (transactional > 2) {
+//added by charlie
 			unsigned status;
 			node_t *n_node = new_node(val, NULL, transactional); 
 			if((status = _xbegin()) == _XBEGIN_STARTED) {
@@ -146,6 +149,7 @@ int set_add(intset_t *set, val_t val, int transactional)
 				printf("add abort\n");
 				result = harris_insert(set, val);
 			}
+//charie finish
 		} else {
 			printf("set_add no transactional\n");
 			TX_START(NL);
@@ -206,6 +210,7 @@ int set_remove(intset_t *set, val_t val, int transactional)
 	unsigned status;
 
 	if (transactional > 3) {
+//added by charlie
 		if((status = _xbegin()) == _XBEGIN_STARTED) {
 			prev = set->head;
 			next = (node_t *)TX_LOAD(&prev->next);
@@ -225,6 +230,7 @@ int set_remove(intset_t *set, val_t val, int transactional)
 			printf("remove commited\n");
 			if(result)
 				FREE(next, sizeof(node_t));
+//charlie finish
 		}else{
 			printf("remove abort\n");
 			result = harris_delete(set, val);
