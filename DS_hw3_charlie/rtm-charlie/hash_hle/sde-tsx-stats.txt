@@ -1,0 +1,49 @@
+# LIST OF RTM COUNTERS DATA PER THREAD 
+#--------------------------------------------------------------------------------------- 
+# TID   OS TID      XBEGIN        XEND      XABORT  GENERAL ABORTS  CONTENTION ABORTS
+    0    10870           0           0           0               0                  0 
+    1    10873           5           4           0               0                  1 
+    2    10874           5           5           0               0                  0 
+  TOTAL                 10           9           0               0                  1 
+
+
+# LIST OF HLE COUNTERS DATA PER THREAD 
+#--------------------------------------------------------------------------------------------------------------------------
+# TID  OS TID  XACQUIRE  SPECULATIVE  NON SPECULATIVE  GENERAL ABORTS  CONTENTION ABORTS  ELISION CACHE FULL  HLE IN RTM
+    0   10870         0            0                0               0                  0                   0           0 
+    1   10873         0            0                0               0                  0                   0           0 
+    2   10874         0            0                0               0                  0                   0           0 
+  TOTAL               0            0                0               0                  0                   0           0 
+
+
+# COUNTERS OF TSX ABORTS PER ABORT REASON 
+#----------------------------------------------------------------------------- 
+# REASON                         RTM ABORTS   HLE ABORTS
+  ABORT_CONTENTION                        1            0 
+
+
+
+# TOP 10 CONTENTION ABORTS 
+#---------------------------------------------------------------------------
+#               IP    COUNT    INSTRUCTION DISASSEMBLY
+0x00007fe660cf32a5        1    mov qword ptr [rax+0x18], rax
+
+
+
+# TOP 10 CONTENTION VICTIM ABORTS 
+#---------------------------------------------------------------------------
+#               IP    COUNT    INSTRUCTION DISASSEMBLY
+0x0000000000400ccd        1    xbegin 0x400cd3
+
+
+
+#LIST OF TSX GENERAL ABORT EVENTS 
+#--------------------------------------------------------------------------------------------------------------------------
+# TID                 IP       DATA ADDRESS       LOCK ADDRESS   TSX TYPE                         REASON  
+
+
+
+#LIST OF TSX CONTENTION ABORT EVENTS 
+#--------------------------------------------------------------------------------------------------------------------------
+# TID          VICTIM IP   KILLER TID          KILLER IP   KILLER DATA ADDRESS  INSIDE TSX       LOCK ADDRESS  TSX TYPE
+    1 0x0000000000400ccd            2 0x00007fe660cf32a5    0x00007fe650000180          NO                N/A       RTM 
