@@ -167,7 +167,9 @@ void *test(void *data) {
 			if (ht_add(d->set, val, TRANSACTIONAL)) {
 				d->nb_added++;
 				last = val;
-			} 				
+			} else {
+				d->nb_aborts++;
+			}			
 			d->nb_add++;
 #if 0
 			if (mnext) { // move

@@ -24,6 +24,7 @@
 #include "hashtable-lock.h"
 
 unsigned int maxhtlength;
+int g_nb_thread;
 
 typedef struct barrier {
 	pthread_cond_t complete;
@@ -154,20 +155,23 @@ void *test(void *data) {
 	unext = (r < d->update);
 	mnext = (r < d->move);
 	cnext = (r >= d->update + d->snapshot);
-	
+
+	int num_add = 0;
+	printf("g_nb_thread: %d\n", g_nb_thread);	
 #ifdef ICC
-	while (stop == 0) {
+	while (num_add < 10000000/g_nb_thread) {
 #else
-	while (AO_load_full(&stop) == 0) {
+	while (num_add < 10000000/g_nb_thread) {
 #endif /* ICC */
-		
+		num_add++;
+
 		if (unext) { // update
 			
 			val = rand_range_re(&d->seed, d->range);
 			if (ht_add(d->set, val, TRANSACTIONAL)) {
 				d->nb_added++;
 				last = val;
-			} 				
+			}
 			d->nb_add++;
 #if 0
 			if (mnext) { // move
@@ -390,6 +394,7 @@ int main(int argc, char **argv)
 					break;
 				case 't':
 					nb_threads = atoi(optarg);
+					g_nb_thread = nb_threads;
 					break;
 				case 'r':
 					range = atol(optarg);
@@ -537,8 +542,8 @@ int main(int argc, char **argv)
 	if (duration > 0) {
 		nanosleep(&timeout, NULL);
 	} else {
-		sigemptyset(&block_set);
-		sigsuspend(&block_set);
+		// sigemptyset(&block_set);
+		// sigsuspend(&block_set);
 	}
 	AO_store_full(&stop, 1);
 	gettimeofday(&end, NULL);

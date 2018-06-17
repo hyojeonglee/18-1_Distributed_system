@@ -1,0 +1,36 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+Bucket	hashtable.h	/^} Bucket;$/;"	t	typeref:struct:_Bucket
+FAILED	hashtable.h	14;"	d
+HASH_INDEX	hashtable.h	5;"	d
+HASH_TABLE_INIT_SIZE	hashtable.h	4;"	d
+HashTable	hashtable.h	/^} HashTable;$/;"	t	typeref:struct:_HashTable
+LOG_MSG	hashtable.h	10;"	d
+LOG_MSG	hashtable.h	8;"	d
+PASS	main.c	9;"	d	file:
+SUCCESS	hashtable.h	13;"	d
+TEST	main.c	8;"	d	file:
+_Bucket	hashtable.h	/^typedef struct _Bucket$/;"	s
+_HASH_TABLE_H_	hashtable.h	2;"	d
+_HashTable	hashtable.h	/^typedef struct _HashTable$/;"	s
+buckets	hashtable.h	/^	Bucket **buckets;$/;"	m	struct:_HashTable
+elem_num	hashtable.h	/^	int elem_num;	\/\/ 已经保存元素的个数$/;"	m	struct:_HashTable
+hash_destroy	hashtable.c	/^int hash_destroy(HashTable *ht)$/;"	f
+hash_init	hashtable.c	/^int hash_init(HashTable *ht)$/;"	f
+hash_insert	hashtable.c	/^int hash_insert(HashTable *ht, char *key, void *value)$/;"	f
+hash_lookup	hashtable.c	/^int hash_lookup(HashTable *ht, char *key, void **result)$/;"	f
+hash_remove	hashtable.c	/^int hash_remove(HashTable *ht, char *key)$/;"	f
+hash_resize	hashtable.c	/^static int hash_resize(HashTable *ht)$/;"	f	file:
+hash_str	hashtable.c	/^static int hash_str(char *key)$/;"	f	file:
+key	hashtable.h	/^	char *key;$/;"	m	struct:_Bucket
+main	main.c	/^int main(int argc, char **argv) { $/;"	f
+next	hashtable.h	/^	struct _Bucket *next;$/;"	m	struct:_Bucket	typeref:struct:_Bucket::_Bucket
+num_threads	main.c	/^static int num_threads = 1;$/;"	v	file:
+resize_hash_table_if_needed	hashtable.c	/^static void resize_hash_table_if_needed(HashTable *ht)$/;"	f	file:
+size	hashtable.h	/^	int size;		\/\/ 哈希表的大小$/;"	m	struct:_HashTable
+value	hashtable.h	/^	void *value;$/;"	m	struct:_Bucket
+worker	main.c	/^void *worker(void *para) $/;"	f

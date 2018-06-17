@@ -155,11 +155,11 @@ void *test(void *data) {
 	unext = (r < d->update);
 	mnext = (r < d->move);
 	cnext = (r >= d->update + d->snapshot);
-
+	
 #ifdef ICC
 	while (stop == 0) {
 #else
-		while (AO_load_full(&stop) == 0) {
+	while (AO_load_full(&stop) == 0) {
 #endif /* ICC */
 
 			if (unext) { // update
@@ -765,6 +765,8 @@ int main(int argc, char **argv)
 	printf("  #dup-w      : %lu (%f / s)\n", aborts_double_write, aborts_double_write * 1000.0 / duration);
 	printf("  #failures   : %lu\n",  failures_because_contention);
 	printf("Max retries   : %lu\n", max_retries);
+
+	printf("FAILURE RATE  : %f\n", failures_because_contention / 10000000.0); 
 
 	// Delete set 
 	ht_delete(set);
