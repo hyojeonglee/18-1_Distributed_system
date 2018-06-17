@@ -163,6 +163,13 @@ void *test(void *data) {
 		
 		if (unext) { // update
 			
+			val = rand_range_re(&d->seed, d->range);
+			if (ht_add(d->set, val, TRANSACTIONAL)) {
+				d->nb_added++;
+				last = val;
+			} 				
+			d->nb_add++;
+#if 0
 			if (mnext) { // move
 				
 				if (last == -1) val = rand_range_re(&d->seed, d->range);
@@ -201,8 +208,11 @@ void *test(void *data) {
 				}
 				d->nb_remove++;
 			}
+#endif
 			
-		} else { // reads
+		}
+#if 0
+		else { // reads
 			
 			if (cnext) { // contains (no snapshot)
 				
@@ -237,7 +247,9 @@ void *test(void *data) {
 				
 			}
 		}
-		
+#endif
+		unext = 1;
+#if 0
 		/* Is the next op an update, a move, a contains? */
 		if (d->effective) { // a failed remove/add is a read-only tx
 			numtx = d->nb_contains + d->nb_add + d->nb_remove + d->nb_move + d->nb_snapshot;
@@ -250,7 +262,7 @@ void *test(void *data) {
 			mnext = (r < d->move);
 			cnext = (r >= d->update + d->snapshot);
 		}
-		
+#endif		
 #ifdef ICC
 	}
 #else

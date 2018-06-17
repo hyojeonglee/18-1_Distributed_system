@@ -50,14 +50,14 @@ int set_contains(intset_t *set, val_t val, int transactional)
 			}		  
 			result = (v == val);
 			_xend();
-			printf("contains commited\n");
+			//printf("contains commited\n");
 		}else{
-			printf("contains abort\n");
+		//	printf("contains abort\n");
 			result = harris_find(set, val);
 		}
 //charlie finish
 	} else {
-		printf("set_contains no transactional\n");
+//		printf("set_contains no transactional\n");
 		TX_START(NL);
 		prev = set->head;
 		next = (node_t *)TX_LOAD(&prev->next);
@@ -143,15 +143,15 @@ int set_add(intset_t *set, val_t val, int transactional)
 					TX_STORE(&prev->next, n_node);
 				}
 				_xend();
-				printf("add committed\n");
+		//		printf("add committed\n");
 			}else{
 				//tx fail 하면 harris_insert로 
-				printf("add abort\n");
+			//	printf("add abort\n");
 				result = harris_insert(set, val);
 			}
 //charie finish
 		} else {
-			printf("set_add no transactional\n");
+	//		printf("set_add no transactional\n");
 			TX_START(NL);
 			prev = set->head;
 			next = (node_t *)TX_LOAD(&prev->next);
@@ -227,12 +227,12 @@ int set_remove(intset_t *set, val_t val, int transactional)
 				TX_STORE(&prev->next, n);
 			}
 			_xend();
-			printf("remove commited\n");
+	//		printf("remove commited\n");
 			if(result)
 				FREE(next, sizeof(node_t));
 //charlie finish
 		}else{
-			printf("remove abort\n");
+	//		printf("remove abort\n");
 			result = harris_delete(set, val);
 		}
 
