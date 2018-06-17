@@ -388,6 +388,7 @@ int main(int argc, char **argv)
 		{"move-rate",                 required_argument, NULL, 'a'},
 		{"snapshot-rate",             required_argument, NULL, 's'},
 		{"elasticity",                required_argument, NULL, 'x'},
+		{"retry",		      required_argument, NULL, 'e'},
 		{NULL, 0, NULL, 0}
 	};
 
@@ -418,11 +419,12 @@ int main(int argc, char **argv)
 	int unit_tx = DEFAULT_ELASTICITY;
 	int alternate = DEFAULT_ALTERNATE;
 	int effective = DEFAULT_EFFECTIVE;
+	int retry = 0;
 	sigset_t block_set;
 
 	while(1) {
 		i = 0;
-		c = getopt_long(argc, argv, "hAf:d:i:t:r:S:u:a:s:l:x:", long_options, &i);
+		c = getopt_long(argc, argv, "e:hAf:d:i:t:r:S:u:a:s:l:x:", long_options, &i);
 
 		if(c == -1)
 			break;
@@ -444,6 +446,8 @@ int main(int argc, char **argv)
 						"Options:\n"
 						"  -h, --help\n"
 						"        Print this message\n"
+						"  -e, --retry\n"
+						"	 Retry for RTM\n"
 						"  -A, --Alternate\n"
 						"        Consecutive insert/remove target the same value\n"
 						"  -f, --effective <int>\n"
@@ -476,6 +480,9 @@ int main(int argc, char **argv)
 						"        5 = elastic-tx w/ optimized move.\n"
 						);
 				exit(0);
+			case 'e':
+				retry = atoi(optarg);
+				break;
 			case 'A':
 				alternate = 1;
 				break;
@@ -625,7 +632,7 @@ int main(int argc, char **argv)
 		data[i].nb_aborts_validate_commit = 0;
 		data[i].nb_aborts_invalid_memory = 0;
 		data[i].nb_aborts_double_write = 0;
-		data[i].max_retries = 0;
+		data[i].max_retries = retry;
 		data[i].seed = rand();
 		data[i].set = set;
 		data[i].barrier = &barrier;
