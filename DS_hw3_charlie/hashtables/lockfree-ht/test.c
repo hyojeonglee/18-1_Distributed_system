@@ -142,6 +142,7 @@ void *test(void *data) {
 	int val2, numtx, r, last = -1;
 	val_t val = 0;
 	int unext, mnext, cnext;
+	int ret = 0;
 
 	thread_data_t *d = (thread_data_t *)data;
 
@@ -166,9 +167,11 @@ void *test(void *data) {
 			if (unext) { // update
 												
 				val = rand_range_re(&d->seed, d->range);
-				if (ht_add(d->set, val, TRANSACTIONAL)) {
+				if ((ret = ht_add(d->set, val, TRANSACTIONAL)) >= 1) { // only abort case harris_insert will return 1 if succeed. committed case will return 2
 					d->nb_added++;
 					last = val;
+					if(ret == 1)
+						d->nb_aborts++;
 				} 				
 				d->nb_add++;
 #if 0

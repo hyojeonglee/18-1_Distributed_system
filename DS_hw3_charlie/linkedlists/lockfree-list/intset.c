@@ -111,12 +111,13 @@ int set_add(intset_t *set, val_t val, int transactional)
 	if (!transactional) {
 
 		result = set_seq_add(set, val);
-
+	//	printf(" 1 add seqq\n");
 	} else { 
 
 #ifdef SEQUENTIAL /* Unprotected */
 
 		result = set_seq_add(set, val);
+	//	printf(" 2 add seqq\n");
 
 #elif defined STM
 
@@ -144,6 +145,7 @@ int set_add(intset_t *set, val_t val, int transactional)
 				}
 				_xend();
 		//		printf("add committed\n");
+				result = 2; // 2 for committed
 			}else{
 				//tx fail 하면 harris_insert로 
 			//	printf("add abort\n");
@@ -151,7 +153,7 @@ int set_add(intset_t *set, val_t val, int transactional)
 			}
 //charie finish
 		} else {
-	//		printf("set_add no transactional\n");
+			printf("set_add no transactional\n");
 			TX_START(NL);
 			prev = set->head;
 			next = (node_t *)TX_LOAD(&prev->next);
