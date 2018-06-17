@@ -140,6 +140,7 @@ typedef struct thread_data {
 
 void *test(void *data) {
 	int val2, numtx, r, last = -1;
+	int curr_retry = 0;
 	val_t val = 0;
 	int unext, mnext, cnext;
 	int ret = 0;
@@ -167,12 +168,21 @@ void *test(void *data) {
 			if (unext) { // update
 												
 				val = rand_range_re(&d->seed, d->range);
-				if ((ret = ht_add(d->set, val, TRANSACTIONAL)) >= 1) { // only abort case harris_insert will return 1 if succeed. committed case will return 2
+			//	if ((ret = ht_add(d->set, val, TRANSACTIONAL)) >= 1) {
+				curr_retry = 0;
+				while((ret = ht_add(d->set, val, TRANSACTIONAL)) == -1) { //retry
+				//	d->nb_added++;
+			    //		last = val;
+				//	if(ret == 1)
+					d->nb_aborts++;
+					curr_retry++;
+					if(curr_retry > d->max_retries){
+						d->failures_because_contention++;
+						break;
+					}
+				}
+				if(ret > 0)
 					d->nb_added++;
-					last = val;
-					if(ret == 1)
-						d->nb_aborts++;
-				} 				
 				d->nb_add++;
 #if 0
 				if (mnext) { // move

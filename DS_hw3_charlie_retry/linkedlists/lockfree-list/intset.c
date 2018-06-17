@@ -144,12 +144,10 @@ int set_add(intset_t *set, val_t val, int transactional)
 					TX_STORE(&prev->next, n_node);
 				}
 				_xend();
-		//		printf("add committed\n");
-				result = 2; // 2 for committed
 			}else{
 				//tx fail 하면 harris_insert로 
 			//	printf("add abort\n");
-				result = harris_insert(set, val);
+				result = -1; //asking for retry
 			}
 //charie finish
 		} else {
