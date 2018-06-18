@@ -158,9 +158,9 @@ void *test(void *data) {
 
 	int num_add = 0;	
 #ifdef ICC
-	while (num_add < 10000000/g_nb_thread) {
+	while (num_add < (int)(10000000/g_nb_thread)){
 #else
-	while (num_add < 10000000/g_nb_thread) {
+	while (num_add < (int)(10000000/g_nb_thread)) {
 #endif /* ICC */
 		num_add++;
 		if (unext) { // update
@@ -310,6 +310,7 @@ int main(int argc, char **argv)
 	int duration = DEFAULT_DURATION;
 	int initial = DEFAULT_INITIAL;
 	int nb_threads = DEFAULT_NB_THREADS;
+	g_nb_thread = nb_threads;
 	long range = DEFAULT_RANGE;
 	int seed = DEFAULT_SEED;
 	int update = DEFAULT_UPDATE;
@@ -320,7 +321,6 @@ int main(int argc, char **argv)
 	int alternate = DEFAULT_ALTERNATE;
 	int effective = DEFAULT_EFFECTIVE;
 	sigset_t block_set;
-	
 	while(1) {
 		i = 0;
 		c = getopt_long(argc, argv, "hAf:d:i:t:r:S:u:a:s:l:x:", long_options, &i);
