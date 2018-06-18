@@ -160,7 +160,6 @@ int set_add(intset_t *set, val_t val, int transactional)
 #elif defined LOCKFREE
 		result = harris_insert(set, val);
 #endif
-		
 	}
 	
 	return result;
