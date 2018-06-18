@@ -4,8 +4,11 @@
 
 ROOT 		?= ..
 #VERSION 	=DEBUG
-# STM: RTM compile 시 주석 제거
-STM   		=LOCKFREE
+
+# STM   	=LOCKFREE
+
+# RTM version 컴파일 시 주석 제거
+# STM		=ESTM
 ESTMDIR		?= $(ROOT)/utils/estm-0.3.0
 TINYSTMDIR 	?= SET_TINYSTM_PATH
 TINY098DIR 	?= SET_TINY098_PATH
