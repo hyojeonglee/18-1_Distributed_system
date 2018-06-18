@@ -3,7 +3,7 @@
 ################
 
 ROOT 		?= ..
-VERSION 	=DEBUG
+# VERSION 	=DEBUG
 # STM
 # STM   		=ESTM
 ESTMDIR		?= $(ROOT)/utils/estm-0.3.0

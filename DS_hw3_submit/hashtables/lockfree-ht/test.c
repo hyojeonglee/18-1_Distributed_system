@@ -25,6 +25,8 @@
 
 /* Hashtable length (# of buckets) */
 unsigned int maxhtlength;
+/* for infinite version */
+int g_nb_thread;
 
 /* Hashtable seed */
 #ifdef TLS
@@ -156,11 +158,16 @@ void *test(void *data) {
 	mnext = (r < d->move);
 	cnext = (r >= d->update + d->snapshot);
 	
+	int num_add = 0;
+
 #ifdef ICC
-	while (stop == 0) {
+	// while (stop == 0) {
+	while (num_add < 10000000/g_nb_thread) {
 #else
-	while (AO_load_full(&stop) == 0) {
+	// while (AO_load_full(&stop) == 0) {
+	while (num_add < 10000000/g_nb_thread) {
 #endif /* ICC */
+			num_add++;
 
 			if (unext) { // update
 
@@ -495,6 +502,7 @@ int main(int argc, char **argv)
 				break;
 			case 't':
 				nb_threads = atoi(optarg);
+				g_nb_thread = nb_threads;
 				break;
 			case 'r':
 				range = atol(optarg);
@@ -650,8 +658,8 @@ int main(int argc, char **argv)
 	if (duration > 0) {
 		nanosleep(&timeout, NULL);
 	} else {
-		sigemptyset(&block_set);
-		sigsuspend(&block_set);
+		// sigemptyset(&block_set);
+		// sigsuspend(&block_set);
 	}
 	AO_store_full(&stop, 1);
 	gettimeofday(&end, NULL);
